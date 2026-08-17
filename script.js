@@ -62,25 +62,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------
-  // 2. PAGE PRELOADER (0.9s INTRO TRANSITION)
+  // 2. PAGE PRELOADER (MINIMUM 3s INTRO TRANSITION)
   // -------------------------------------------------------
   const preloader = document.getElementById('preloader');
   const preloaderBar = document.getElementById('preloader-bar');
+  const loaderMinimumDuration = 3000;
+  const loaderStartTime = performance.now();
+  let loaderFinished = false;
 
   if (preloader) {
+    document.body.classList.add('loading');
+
     if (prefersReducedMotion) {
       preloader.style.display = 'none';
+      document.body.classList.remove('loading');
     } else {
-      setTimeout(() => {
-        if (preloaderBar) preloaderBar.style.width = '100%';
-      }, 100);
+      const finishLoader = () => {
+        if (loaderFinished) return;
+        loaderFinished = true;
 
-      setTimeout(() => {
         preloader.classList.add('fade-out');
+        document.body.classList.remove('loading');
+
         setTimeout(() => {
           preloader.style.display = 'none';
-        }, 500);
-      }, 850);
+        }, 700);
+      };
+
+      const startLoaderSequence = () => {
+        if (loaderFinished) return;
+
+        if (preloaderBar) {
+          preloaderBar.style.width = '100%';
+        }
+
+        const elapsed = performance.now() - loaderStartTime;
+        const remaining = Math.max(0, loaderMinimumDuration - elapsed);
+
+        setTimeout(finishLoader, remaining);
+      };
+
+      setTimeout(() => {
+        if (preloaderBar) preloaderBar.style.width = '26%';
+      }, 180);
+
+      setTimeout(() => {
+        if (preloaderBar) preloaderBar.style.width = '58%';
+      }, 720);
+
+      setTimeout(() => {
+        if (preloaderBar) preloaderBar.style.width = '100%';
+      }, 1500);
+
+      window.addEventListener('load', startLoaderSequence, { once: true });
+
+      setTimeout(() => {
+        if (!document.readyState || document.readyState === 'complete') {
+          startLoaderSequence();
+        }
+      }, 1200);
+
+      setTimeout(() => {
+        if (!loaderFinished) {
+          startLoaderSequence();
+        }
+      }, 3500);
     }
   }
 
@@ -331,6 +377,14 @@ document.addEventListener('DOMContentLoaded', () => {
           toggleMobileMenu(false);
         }
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      const clickInsideMenu = siteNav.contains(e.target);
+      const clickOnToggle = mobileNavToggle.contains(e.target);
+      if (!clickInsideMenu && !clickOnToggle && siteNav.classList.contains('is-open')) {
+        toggleMobileMenu(false);
+      }
     });
 
     document.addEventListener('keydown', (e) => {
