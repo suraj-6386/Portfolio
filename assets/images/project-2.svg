@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="p2Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="waferGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" rx="16" fill="url(#p2Bg)"/>
+  
+  <!-- Dashboard Top Bar -->
+  <rect x="24" y="24" width="552" height="40" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+  <circle cx="44" cy="44" r="6" fill="#ef4444"/>
+  <circle cx="62" cy="44" r="6" fill="#f59e0b"/>
+  <circle cx="80" cy="44" r="6" fill="#10b981"/>
+  <text x="110" y="49" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Semiconductor Wafer Yield &amp; Quality Control Pipeline</text>
+  <rect x="480" y="34" width="80" height="20" rx="4" fill="#3b82f6" fill-opacity="0.2"/>
+  <text x="520" y="48" fill="#60a5fa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">PYTHON / ML</text>
+
+  <!-- Left: Sensor Heatmap / Wafer Map -->
+  <g transform="translate(24, 76)">
+    <rect width="260" height="260" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+    <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Sensor Anomaly Heatmap Matrix</text>
+    
+    <!-- Heatmap Grid -->
+    <g transform="translate(20, 42)">
+      <!-- Row 1 -->
+      <rect x="0" y="0" width="36" height="36" rx="4" fill="#0284c7" opacity="0.6"/>
+      <rect x="42" y="0" width="36" height="36" rx="4" fill="#0284c7" opacity="0.8"/>
+      <rect x="84" y="0" width="36" height="36" rx="4" fill="#38bdf8" opacity="0.9"/>
+      <rect x="126" y="0" width="36" height="36" rx="4" fill="#0284c7" opacity="0.4"/>
+      <rect x="168" y="0" width="36" height="36" rx="4" fill="#10b981" opacity="0.8"/>
+      <!-- Row 2 -->
+      <rect x="0" y="42" width="36" height="36" rx="4" fill="#0284c7" opacity="0.9"/>
+      <rect x="42" y="42" width="36" height="36" rx="4" fill="#ef4444" opacity="0.85"/>
+      <rect x="84" y="42" width="36" height="36" rx="4" fill="#ef4444" opacity="0.95"/>
+      <rect x="126" y="42" width="36" height="36" rx="4" fill="#f59e0b" opacity="0.7"/>
+      <rect x="168" y="42" width="36" height="36" rx="4" fill="#0284c7" opacity="0.5"/>
+      <!-- Row 3 -->
+      <rect x="0" y="84" width="36" height="36" rx="4" fill="#38bdf8" opacity="0.7"/>
+      <rect x="42" y="84" width="36" height="36" rx="4" fill="#ef4444" opacity="0.9"/>
+      <rect x="84" y="84" width="36" height="36" rx="4" fill="#38bdf8" opacity="0.8"/>
+      <rect x="126" y="84" width="36" height="36" rx="4" fill="#10b981" opacity="0.9"/>
+      <rect x="168" y="84" width="36" height="36" rx="4" fill="#0284c7" opacity="0.6"/>
+      <!-- Row 4 -->
+      <rect x="0" y="126" width="36" height="36" rx="4" fill="#0284c7" opacity="0.4"/>
+      <rect x="42" y="126" width="36" height="36" rx="4" fill="#0284c7" opacity="0.5"/>
+      <rect x="84" y="126" width="36" height="36" rx="4" fill="#10b981" opacity="0.8"/>
+      <rect x="126" y="126" width="36" height="36" rx="4" fill="#10b981" opacity="0.9"/>
+      <rect x="168" y="126" width="36" height="36" rx="4" fill="#38bdf8" opacity="0.7"/>
+      <!-- Row 5 -->
+      <rect x="0" y="168" width="36" height="36" rx="4" fill="#10b981" opacity="0.7"/>
+      <rect x="42" y="168" width="36" height="36" rx="4" fill="#10b981" opacity="0.9"/>
+      <rect x="84" y="168" width="36" height="36" rx="4" fill="#0284c7" opacity="0.6"/>
+      <rect x="126" y="168" width="36" height="36" rx="4" fill="#0284c7" opacity="0.8"/>
+      <rect x="168" y="168" width="36" height="36" rx="4" fill="#38bdf8" opacity="0.5"/>
+    </g>
+    <text x="20" y="248" fill="#ef4444" font-family="monospace" font-size="9">● Defect Cluster Identified</text>
+  </g>
+
+  <!-- Right: ML Model Metrics & Distribution -->
+  <g transform="translate(300, 76)">
+    <!-- Top Metric -->
+    <rect width="276" height="110" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+    <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Feature Importance &amp; Precision</text>
+    
+    <g transform="translate(16, 40)">
+      <text x="0" y="12" fill="#cbd5e1" font-family="monospace" font-size="10">Sensor_Temp_V2</text>
+      <rect x="110" y="4" width="130" height="8" rx="4" fill="#1e293b"/>
+      <rect x="110" y="4" width="115" height="8" rx="4" fill="#38bdf8"/>
+      
+      <text x="0" y="32" fill="#cbd5e1" font-family="monospace" font-size="10">Pressure_Drop_7</text>
+      <rect x="110" y="24" width="130" height="8" rx="4" fill="#1e293b"/>
+      <rect x="110" y="24" width="95" height="8" rx="4" fill="#818cf8"/>
+      
+      <text x="0" y="52" fill="#cbd5e1" font-family="monospace" font-size="10">Plasma_Current</text>
+      <rect x="110" y="44" width="130" height="8" rx="4" fill="#1e293b"/>
+      <rect x="110" y="44" width="70" height="8" rx="4" fill="#34d399"/>
+    </g>
+
+    <!-- Bottom Distribution Curve -->
+    <g transform="translate(0, 126)">
+      <rect width="276" height="134" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+      <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Yield Distribution Curve (Normal vs Outliers)</text>
+      
+      <path d="M 20 110 Q 70 108, 110 80 Q 138 25, 160 80 Q 200 108, 256 110" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+      <path d="M 20 110 Q 70 108, 110 80 Q 138 25, 160 80 Q 200 108, 256 110 L 256 115 L 20 115 Z" fill="#38bdf8" fill-opacity="0.1"/>
+      <line x1="138" y1="30" x2="138" y2="115" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="144" y="45" fill="#f59e0b" font-family="monospace" font-size="9">Mean Yield</text>
+    </g>
+  </g>
+</svg>

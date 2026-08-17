@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="p4Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="sfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00a1e0"/>
+      <stop offset="100%" stop-color="#0176d3"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" rx="16" fill="url(#p4Bg)"/>
+  
+  <!-- Dashboard Top Bar -->
+  <rect x="24" y="24" width="552" height="40" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+  <circle cx="44" cy="44" r="6" fill="#ef4444"/>
+  <circle cx="62" cy="44" r="6" fill="#f59e0b"/>
+  <circle cx="80" cy="44" r="6" fill="#10b981"/>
+  <text x="110" y="49" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Salesforce CRM Architecture, Flow Automation &amp; Security Setup</text>
+  <rect x="475" y="34" width="85" height="20" rx="4" fill="#0176d3" fill-opacity="0.2"/>
+  <text x="517" y="48" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" text-anchor="middle">SALESFORCE</text>
+
+  <!-- Left Card: Schema / Object Relations -->
+  <g transform="translate(24, 76)">
+    <rect width="260" height="260" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+    <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Data Model &amp; Custom Objects</text>
+    
+    <g transform="translate(16, 42)">
+      <!-- Account Object -->
+      <rect width="105" height="56" rx="6" fill="#1e293b" stroke="#00a1e0" stroke-width="1.5"/>
+      <text x="10" y="20" fill="#f8fafc" font-family="sans-serif" font-size="10" font-weight="700">Account (Standard)</text>
+      <text x="10" y="36" fill="#64748b" font-family="monospace" font-size="8">1:M Master-Detail</text>
+      <text x="10" y="48" fill="#38bdf8" font-family="monospace" font-size="8">Role Hierarchy</text>
+
+      <!-- Opportunity Object -->
+      <g transform="translate(125, 0)">
+        <rect width="105" height="56" rx="6" fill="#1e293b" stroke="#818cf8" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#f8fafc" font-family="sans-serif" font-size="10" font-weight="700">Opportunity</text>
+        <text x="10" y="36" fill="#64748b" font-family="monospace" font-size="8">Stage Progression</text>
+        <text x="10" y="48" fill="#818cf8" font-family="monospace" font-size="8">Validation Rules</text>
+      </g>
+
+      <!-- Custom Project Object -->
+      <g transform="translate(60, 80)">
+        <rect width="115" height="60" rx="6" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#f8fafc" font-family="sans-serif" font-size="10" font-weight="700">Client_Project__c</text>
+        <text x="10" y="36" fill="#64748b" font-family="monospace" font-size="8">Custom Lookup</text>
+        <text x="10" y="50" fill="#34d399" font-family="monospace" font-size="8">Record Types (2)</text>
+      </g>
+
+      <!-- Flow badge below -->
+      <g transform="translate(0, 160)">
+        <rect width="230" height="38" rx="6" fill="#0176d3" fill-opacity="0.1" stroke="#00a1e0" stroke-dasharray="3 3"/>
+        <text x="12" y="23" fill="#38bdf8" font-family="sans-serif" font-size="10" font-weight="600">⚡ Automated Record-Triggered Flow Active</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Card: Security & Reports -->
+  <g transform="translate(300, 76)">
+    <!-- Security Matrix -->
+    <rect width="276" height="120" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+    <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Profiles, OWD &amp; Permission Sets</text>
+    
+    <g transform="translate(16, 40)">
+      <rect width="244" height="24" rx="4" fill="#1e293b"/>
+      <text x="10" y="16" fill="#cbd5e1" font-family="sans-serif" font-size="9">OWD: Private on Opportunities</text>
+      <text x="200" y="16" fill="#34d399" font-family="monospace" font-size="9">SECURED</text>
+
+      <rect y="32" width="244" height="24" rx="4" fill="#1e293b"/>
+      <text x="10" y="48" fill="#cbd5e1" font-family="sans-serif" font-size="9">Field-Level Security (FLS) Filter</text>
+      <text x="200" y="48" fill="#34d399" font-family="monospace" font-size="9">APPLIED</text>
+    </g>
+
+    <!-- Reports & Dashboards -->
+    <g transform="translate(0, 136)">
+      <rect width="276" height="124" rx="8" fill="#131d33" stroke="rgba(148,163,184,0.1)"/>
+      <text x="16" y="24" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="600">Executive Summary Reports &amp; Gauge</text>
+      
+      <!-- Mini Progress / Gauge -->
+      <g transform="translate(16, 42)">
+        <rect width="244" height="16" rx="8" fill="#1e293b"/>
+        <rect width="180" height="16" rx="8" fill="url(#sfGrad)"/>
+        <text x="10" y="12" fill="#ffffff" font-family="sans-serif" font-size="9" font-weight="700">Conversion Rate: 74%</text>
+
+        <rect y="26" width="244" height="36" rx="6" fill="#1e293b" stroke="rgba(148,163,184,0.1)"/>
+        <text x="10" y="48" fill="#94a3b8" font-family="sans-serif" font-size="10">Summary Matrix Report with Dynamic Charts</text>
+      </g>
+    </g>
+  </g>
+</svg>
