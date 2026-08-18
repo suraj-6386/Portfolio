@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" class="loading">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    /* Critical first-paint guard: keep preloader visible before main CSS/JS bootstraps */
+    html.loading body > *:not(#preloader):not(script) {
+      visibility: hidden;
+    }
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      display: flex;
+    }
+  </style>
   
   <!-- Primary SEO Meta Tags -->
-  <title>Suraj | MCA Student &amp; Aspiring Data Analyst</title>
+  <title>Suraj Gupta | MCA Student &amp; Aspiring Data Analyst</title>
   <meta name="title" content="Suraj | MCA Student & Aspiring Data Analyst">
   <meta name="description" content="Personal portfolio of Suraj, MCA student and aspiring Data Analyst with capabilities in SQL, Python, Power BI, Excel, Salesforce Administration, and UI/UX design.">
   <meta name="keywords" content="Suraj, Data Analyst Portfolio, MCA Student, SQL, Python, Power BI, Tableau, Excel, Salesforce Administrator, UI UX Developer, Fresher Data Analyst">
@@ -18,23 +34,38 @@
   <meta property="og:url" content="https://YOUR_WEBSITE_URL_HERE.com">
   <meta property="og:title" content="Suraj | MCA Student & Aspiring Data Analyst">
   <meta property="og:description" content="Explore data analytics projects, SQL modeling, BI dashboards, and technical skills by Suraj.">
-  <meta property="og:image" content="assets/images/profile.png">
+  <meta property="og:image" content="assets/images/profile_light.png">
 
   <!-- Twitter Meta Tags -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:title" content="Suraj | MCA Student & Aspiring Data Analyst">
   <meta property="twitter:description" content="Explore data analytics projects, SQL modeling, BI dashboards, and technical skills by Suraj.">
-  <meta property="twitter:image" content="assets/images/profile.png">
+  <meta property="twitter:image" content="assets/images/profile_light.png">
 
   <!-- Google Fonts: Editorial Serif (Newsreader) + Clean Modern Sans (Plus Jakarta Sans) + Tech Mono (JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('suraj_theme');
+        const initialTheme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+        document.documentElement.setAttribute('data-theme', initialTheme);
+      } catch (error) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="preload" as="image" href="assets/images/profile_light.png">
+  <link rel="preload" as="image" href="assets/images/profile_dark.png">
+
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="loading">
   <!-- =========================================================
        PAGE PRELOADER
        ========================================================= -->
@@ -46,11 +77,17 @@
         <span class="preloader-char" style="--char-idx: 3;">R</span>
         <span class="preloader-char" style="--char-idx: 4;">A</span>
         <span class="preloader-char" style="--char-idx: 5;">J</span>
+        &nbsp;
+        <span class="preloader-char" style="--char-idx: 6;">G</span>
+        <span class="preloader-char" style="--char-idx: 7;">U</span>
+        <span class="preloader-char" style="--char-idx: 8;">P</span>
+        <span class="preloader-char" style="--char-idx: 9;">T</span>
+        <span class="preloader-char" style="--char-idx: 10;">A</span>
       </div>
       <div class="preloader-line-track">
         <div class="preloader-line-fill" id="preloader-bar"></div>
       </div>
-      <div class="preloader-sub">DATA • ANALYTICS • TECHNOLOGY</div>
+      <div class="preloader-sub">DATA • TECHNOLOGY • DESIGN</div>
     </div>
   </div>
 
@@ -68,9 +105,9 @@
        ========================================================= -->
   <header class="site-header" id="site-header">
     <div class="container header-container">
-      <a href="#home" class="brand-logo" aria-label="Suraj Portfolio Home" data-magnetic>
-        <span class="brand-name">Suraj</span>
-        <span class="brand-dot">.</span>
+      <a href="#home" class="brand-logo" aria-label="Suraj Gupta Portfolio Home" data-magnetic>
+        <span class="brand-name">SURAJ GUPTA </span>
+       
         <span class="brand-badge">Data Analyst</span>
       </a>
 
@@ -81,7 +118,7 @@
           <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
           <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
           <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+          <!-- <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li> -->
           <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
           <li class="nav-item nav-item-cta"><a href="#resume" class="nav-link nav-btn-resume" data-magnetic>Resume &darr;</a></li>
           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
@@ -121,7 +158,7 @@
           </div>
 
           <h1 class="hero-title">
-            <span class="hero-word" style="--word-idx: 1;">SURAJ</span>
+            <span class="hero-word" style="--word-idx: 1;">SURAJ GUPTA</span>
           </h1>
 
           <h2 class="hero-subtitle">
@@ -151,15 +188,15 @@
           <div class="hero-socials">
             <span class="socials-label">Connect:</span>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile" id="hero-social-linkedin" data-magnetic>
+              <a href="https://www.linkedin.com/in/suraj6386/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile" id="hero-social-linkedin" data-magnetic>
                 <span>LinkedIn</span>
               </a>
               <span class="social-sep">&bull;</span>
-              <a href="https://github.com/YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile" id="hero-social-github" data-magnetic>
+              <a href="https://github.com/suraj-6386" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile" id="hero-social-github" data-magnetic>
                 <span>GitHub</span>
               </a>
               <span class="social-sep">&bull;</span>
-              <a href="mailto:YOUR_EMAIL_HERE" class="social-link" aria-label="Send Email" id="hero-social-email" data-magnetic>
+              <a href="mailto:sg022529@gmail.com" class="social-link" aria-label="Send Email" id="hero-social-email" data-magnetic>
                 <span>Email</span>
               </a>
             </div>
@@ -170,8 +207,9 @@
         <div class="hero-visual" data-parallax-container>
           <div class="editorial-frame" data-tilt>
             <div class="frame-backdrop"></div>
-            <div class="frame-content">
-              <img src="assets/images/profile.png" alt="Profile representation of Suraj - MCA Student &amp; Aspiring Data Analyst" class="profile-img" width="380" height="380" loading="eager">
+            <div class="frame-content profile-image-shell" aria-live="polite">
+              <img src="assets/images/profile_light.png" alt="Profile representation of Suraj - MCA Student &amp; Aspiring Data Analyst" class="profile-img profile-img-light" width="380" height="380" loading="eager">
+              <img src="assets/images/profile_dark.png" alt="" aria-hidden="true" class="profile-img profile-img-dark" width="380" height="380" loading="eager">
             </div>
 
             <!-- Subtle Analytical Graph Card -->
@@ -270,7 +308,7 @@
                 </li>
                 <li class="fact-row">
                   <span class="fact-key">Location</span>
-                  <span class="fact-val">YOUR_LOCATION_HERE</span>
+                  <span class="fact-val">PUNE</span>
                 </li>
                 <li class="fact-row">
                   <span class="fact-key">Availability</span>
@@ -661,92 +699,7 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         5. EXPERIENCE SECTION
-         ========================================================= -->
-    <section class="experience-section section" id="experience" aria-label="Experience and Internships">
-      <div class="container">
-        
-        <div class="editorial-section-header" data-reveal>
-          <span class="editorial-number">04 / EXPERIENCE</span>
-          <h2 class="editorial-heading">Experience &amp; Practical Training</h2>
-          <div class="editorial-rule"></div>
-          <p class="editorial-lead">
-            Honest record of technical internships, specialized training, and practical data project engagements.
-          </p>
-        </div>
-
-        <div class="editorial-timeline" id="experience-timeline">
-          <!-- Scroll-Linked Vertical Line Track -->
-          <div class="timeline-track">
-            <div class="timeline-progress-fill" id="experience-progress-bar"></div>
-          </div>
-
-          <!-- Entry 1: Internship Placeholder -->
-          <div class="timeline-node-item" data-reveal>
-            <div class="timeline-bullet"></div>
-            <div class="timeline-body-card" data-tilt>
-              <div class="timeline-header-row">
-                <span class="timeline-type">Internship / Practical Training</span>
-                <span class="timeline-date">[Start Date] &ndash; [End Date / Present]</span>
-              </div>
-              <h3 class="timeline-role-title">[Internship / Training Role Title &mdash; e.g., Data Analyst Intern]</h3>
-              <h4 class="timeline-org">[Organization / Company / Training Institute Name] &bull; [Location or Remote]</h4>
-              
-              <div class="timeline-content-body">
-                <p class="placeholder-highlight">
-                  [YOUR EXPERIENCE HERE &mdash; Replace with your actual experience details once available. Highlight analytical tasks, datasets analyzed, and tools utilized.]
-                </p>
-                <ul class="timeline-task-list">
-                  <li>[Task 1: Performed exploratory data analysis, dataset cleaning, and transformation using SQL and Python / Pandas.]</li>
-                  <li>[Task 2: Designed and maintained interactive business reports / Power BI dashboards for KPI tracking.]</li>
-                  <li>[Task 3: Collaborated with mentors / teammates to translate business requirements into technical metrics.]</li>
-                </ul>
-              </div>
-
-              <div class="timeline-tags-row">
-                <span class="stack-badge">SQL</span>
-                <span class="stack-badge">Python</span>
-                <span class="stack-badge">Power BI</span>
-                <span class="stack-badge">Excel</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Entry 2: Academic & Self-Directed Projects -->
-          <div class="timeline-node-item" data-reveal>
-            <div class="timeline-bullet"></div>
-            <div class="timeline-body-card" data-tilt>
-              <div class="timeline-header-row">
-                <span class="timeline-type">Academic &amp; Self-Directed Practice</span>
-                <span class="timeline-date">Ongoing MCA Curriculum</span>
-              </div>
-              <h3 class="timeline-role-title">Data Analytics &amp; Applied Software Practice</h3>
-              <h4 class="timeline-org">Academic Projects &amp; Self-Directed Case Studies &bull; MCA Program</h4>
-              
-              <div class="timeline-content-body">
-                <p>
-                  Engaged in practical data projects simulating real-world industry scenarios, including sales trend analysis, ETL pipeline construction, and CRM system configuration.
-                </p>
-                <ul class="timeline-task-list">
-                  <li>Built relational database schemas, normalized tables to 3NF, and executed complex analytical queries with window functions.</li>
-                  <li>Developed data visualizations focusing on clean visual storytelling, accessible palettes, and intuitive user comprehension.</li>
-                  <li>Implemented Salesforce custom objects, validation rules, and automated workflow flows in developer sandbox environments.</li>
-                </ul>
-              </div>
-
-              <div class="timeline-tags-row">
-                <span class="stack-badge">Data Modeling</span>
-                <span class="stack-badge">Business Intelligence</span>
-                <span class="stack-badge">Salesforce Sandbox</span>
-                <span class="stack-badge">UI/UX Layouts</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    <!-- Experience section intentionally omitted for fresher profile. -->
 
     <!-- =========================================================
          6. EDUCATION SECTION
@@ -769,26 +722,16 @@
           <div class="education-entry-card primary-edu-card" data-reveal data-tilt>
             <div class="edu-top-row">
               <span class="edu-status-pill current-pill">Current Degree</span>
-              <span class="edu-years">2024 &ndash; 2026 (Expected)</span>
+              <span class="edu-years">2025 &ndash; 2027 (Pursuing)</span>
             </div>
 
             <h3 class="edu-title">Master of Computer Applications (MCA)</h3>
-            <h4 class="edu-school">YOUR_COLLEGE_NAME</h4>
-            <span class="edu-place">YOUR_COLLEGE_LOCATION</span>
+            <h4 class="edu-school">DR. DY PATIL VIDYAPEETH</h4>
+            <span class="edu-place">PUNE, MAHARASHTRA</span>
 
             <div class="edu-score-line">
-              <span class="score-key">Score / CGPA:</span>
-              <span class="score-val">[CGPA: YOUR_CGPA_HERE / In Progress]</span>
-            </div>
-
-            <div class="edu-curriculum">
-              <span class="curriculum-title">Key Academic Focus:</span>
-              <ul class="curriculum-list">
-                <li>Relational Database Management Systems (RDBMS &amp; SQL)</li>
-                <li>Data Structures, Algorithms &amp; Computational Logic</li>
-                <li>Data Analysis, Python Programming &amp; Statistical Modeling</li>
-                <li>Software Engineering &amp; Modern Web Development</li>
-              </ul>
+              <span class="score-key">CGPA:</span>
+              <span class="score-val">9.18</span>
             </div>
           </div>
 
@@ -796,26 +739,50 @@
           <div class="education-entry-card" data-reveal data-tilt>
             <div class="edu-top-row">
               <span class="edu-status-pill">Graduated</span>
-              <span class="edu-years">[Start Year] &ndash; [Graduation Year]</span>
+              <span class="edu-years">2022 &ndash; 2025</span>
             </div>
 
-            <h3 class="edu-title">[Bachelor's Degree Title &mdash; e.g. BCA / B.Sc. / B.Tech]</h3>
-            <h4 class="edu-school">YOUR_BACHELOR_COLLEGE</h4>
-            <span class="edu-place">YOUR_BACHELOR_LOCATION</span>
+            <h3 class="edu-title">Bachelor of Computer Applications (BCA)</h3>
+            <h4 class="edu-school">INTEGRAL UNIVERSITY</h4>
+            <span class="edu-place">LUCKNOW, UTTAR PRADESH</span>
 
             <div class="edu-score-line">
-              <span class="score-key">Score / CGPA:</span>
-              <span class="score-val">[Percentage / CGPA: YOUR_BACHELOR_SCORE]</span>
+              <span class="score-key">CGPA:</span>
+              <span class="score-val">9.7</span>
+            </div>
+          </div>
+
+          <!-- Class 12 -->
+          <div class="education-entry-card" data-reveal data-tilt>
+            <div class="edu-top-row">
+              <span class="edu-status-pill">Higher Secondary School</span>
+              <span class="edu-years">2019 &ndash; 2021</span>
             </div>
 
-            <div class="edu-curriculum">
-              <span class="curriculum-title">Foundation Topics:</span>
-              <ul class="curriculum-list">
-                <li>Computer Fundamentals, Operating Systems &amp; Networking</li>
-                <li>Programming Fundamentals (C/C++, Java, or Python)</li>
-                <li>Mathematics for Computing &amp; Quantitative Aptitude</li>
-                <li>Database Basics &amp; Information Systems</li>
-              </ul>
+            <h3 class="edu-title">Higher Secondary School</h3>
+            <h4 class="edu-school">JAY BAJRANG INTER COLLEGE</h4>
+            <span class="edu-place">UTTAR PRADESH</span>
+
+            <div class="edu-score-line">
+              <span class="score-key">Score:</span>
+              <span class="score-val">75.2%</span>
+            </div>
+          </div>
+
+          <!-- Class 10 -->
+          <div class="education-entry-card" data-reveal data-tilt>
+            <div class="edu-top-row">
+              <span class="edu-status-pill">Secondary School</span>
+              <span class="edu-years">2017 &ndash; 2019</span>
+            </div>
+
+            <h3 class="edu-title">Secondary School</h3>
+            <h4 class="edu-school">UNIVERSAL PUBLIC SCHOOL</h4>
+            <span class="edu-place">UTTAR PRADESH</span>
+
+            <div class="edu-score-line">
+              <span class="score-key">Score:</span>
+              <span class="score-val">79.4%</span>
             </div>
           </div>
 
@@ -826,48 +793,111 @@
     <!-- =========================================================
          7. RESUME SECTION
          ========================================================= -->
-    <section class="resume-section section" id="resume" aria-label="Resume Download">
-      <div class="container">
-        
-        <div class="resume-editorial-box" data-reveal data-tilt>
+    <section class="resume-section section" id="resume" aria-label="Resume">
+      <div class="container resume-shell">
+        <div class="resume-intro" data-reveal>
           <span class="editorial-number">06 / RESUME</span>
-          
-          <h2 class="resume-headline">A clearer view of my background and skills.</h2>
-          
+          <h2 class="resume-headline">A clearer view of my background, skills &amp; journey.</h2>
           <p class="resume-description">
-            My resume outlines my academic journey in the MCA program, technical skills across Data Analytics (SQL, Python, Power BI, Excel), practical project breakdowns, and supporting capabilities in Salesforce and UI/UX.
-          </p>
-
-          <div class="resume-points-row">
-            <span class="point-item">&bull; Structured for Data Analyst &amp; BI roles</span>
-            <span class="point-item">&bull; Verified academic milestones &amp; coursework</span>
-            <span class="point-item">&bull; Concise 1-page recruiter format</span>
-          </div>
-
-          <div class="resume-buttons-row">
-            <!-- Download Button (Points to exact PDF) -->
-            <a href="assets/resume/Suraj_Resume.pdf" download="Suraj_Resume.pdf" class="btn btn-primary btn-download-resume" id="resume-download-btn" data-magnetic>
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-              <span>Download Resume (PDF)</span>
-            </a>
-
-            <!-- View Button in New Tab -->
-            <a href="assets/resume/Suraj_Resume.pdf" target="_blank" rel="noopener" class="btn btn-outline" id="resume-view-btn" data-magnetic>
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-              </svg>
-              <span>View Resume</span>
-            </a>
-          </div>
-
-          <p class="resume-note-sub">
-            <em>Note:</em> To update, place your resume PDF named <code>Suraj_Resume.pdf</code> inside <code>assets/resume/</code>.
+            My academic foundation, technical capabilities, and analytical practice converge into a strong profile for Data Analyst and BI-focused roles. I combine structured learning in MCA with hands-on exposure to SQL, Python, Power BI, Excel, Salesforce, and user-centered design thinking.
           </p>
         </div>
 
+        <div class="resume-layout">
+          <div class="resume-info-column" data-reveal>
+            <div class="resume-profile-card">
+              <div class="resume-card-label">Professional Snapshot</div>
+              <div class="resume-info-item">
+                <span class="resume-info-tag">Education</span>
+                <strong>MCA / Computer Applications</strong>
+              </div>
+              <div class="resume-info-item">
+                <span class="resume-info-tag">Focus</span>
+                <strong>Data Analytics</strong>
+              </div>
+              <div class="resume-info-item">
+                <span class="resume-info-tag">Core Skills</span>
+                <strong>SQL &middot; Python &middot; Power BI &middot; Excel</strong>
+              </div>
+              <div class="resume-info-item">
+                <span class="resume-info-tag">Additional Skills</span>
+                <strong>Salesforce &middot; UI/UX</strong>
+              </div>
+              <div class="resume-info-item status-item">
+                <span class="resume-info-tag">Status</span>
+                <strong>Open to Opportunities</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="resume-document-wrap" data-reveal>
+            <div class="resume-document-stack" aria-label="Resume preview document">
+              <div class="resume-document-back"></div>
+              <div class="resume-document-paper" data-tilt>
+                <div class="resume-document-header">
+                  <span class="resume-document-mark">RESUME / 01</span>
+                  <span class="resume-document-status">Open to Work</span>
+                </div>
+
+                <div class="resume-document-body">
+                  <div class="resume-doc-topline">
+                    <div>
+                      <h3>SURAJ GUPTA</h3>
+                      <p>DATA ANALYST</p>
+                    </div>
+                    <span class="resume-doc-badge">Fresher Profile</span>
+                  </div>
+
+                  <div class="resume-doc-grid">
+                    <div class="resume-doc-block">
+                      <span class="resume-block-label">Education</span>
+                      <p>MCA (Pursuing)</p>
+                      <p>Dr. D. Y. Patil Vidyapeeth, Pune</p>
+                      <p>BCA &middot; Integral University</p>
+                    </div>
+
+                    <div class="resume-doc-block">
+                      <span class="resume-block-label">Technical Skills</span>
+                      <p>SQL, Python, Power BI, Excel</p>
+                      <p>Data Cleaning, Analysis, Reporting</p>
+                    </div>
+
+                    <div class="resume-doc-block">
+                      <span class="resume-block-label">Projects</span>
+                      <p>Sales Analytics, KPI Dashboards</p>
+                      <p>Data Visualization &amp; Storytelling</p>
+                    </div>
+
+                    <div class="resume-doc-block">
+                      <span class="resume-block-label">Additional</span>
+                      <p>Salesforce Administration</p>
+                      <p>UI/UX &amp; Workflow Design</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-actions" data-reveal>
+          <button type="button" class="btn btn-primary view-resume-btn" id="resume-view-btn" data-magnetic
+            aria-haspopup="dialog" aria-controls="modal-resume-preview"
+            aria-label="View resume in preview window">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>View Resume</span>
+          </button>
+
+          <a href="assets/resume/Suraj_Resume.pdf" download="Suraj_Resume.pdf" class="btn btn-outline btn-download-resume resume-download-btn" id="resume-download-btn" data-magnetic>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            <span>Download Resume</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -897,27 +927,27 @@
 
             <div class="contact-cards-stack">
               <!-- Email -->
-              <a href="mailto:YOUR_EMAIL_HERE" class="channel-card" id="contact-card-email" data-magnetic>
+              <a href="mailto:sg022529@gmail.com" class="channel-card" id="contact-card-email" data-magnetic>
                 <span class="channel-type">EMAIL</span>
-                <span class="channel-val">YOUR_EMAIL_HERE</span>
+                <span class="channel-val">sg022529@gmail.com</span>
               </a>
 
               <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer" class="channel-card" id="contact-card-linkedin" data-magnetic>
+              <a href="https://www.linkedin.com/in/suraj6386/" target="_blank" rel="noopener noreferrer" class="channel-card" id="contact-card-linkedin" data-magnetic>
                 <span class="channel-type">LINKEDIN</span>
-                <span class="channel-val">linkedin.com/in/YOUR_LINKEDIN_URL</span>
+                <span class="channel-val">linkedin.com/in/suraj6386</span>
               </a>
 
               <!-- GitHub -->
-              <a href="https://github.com/YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer" class="channel-card" id="contact-card-github" data-magnetic>
+              <a href="https://github.com/suraj-6386" target="_blank" rel="noopener noreferrer" class="channel-card" id="contact-card-github" data-magnetic>
                 <span class="channel-type">GITHUB</span>
-                <span class="channel-val">github.com/YOUR_GITHUB_URL</span>
+                <span class="channel-val">github.com/suraj-6386</span>
               </a>
 
               <!-- Location -->
               <div class="channel-card static-channel" data-tilt>
                 <span class="channel-type">LOCATION</span>
-                <span class="channel-val">YOUR_LOCATION_HERE</span>
+                <span class="channel-val">PUNE, MAHARASTRA</span>
               </div>
             </div>
           </div>
@@ -927,7 +957,7 @@
             <div class="editorial-card form-card" data-tilt>
               <h3 class="form-card-title">Send a Message</h3>
               <p class="form-card-sub">
-                Messages are securely transmitted to my inbox via Web3Forms.
+                Messages are securely transmitted to my inbox.
               </p>
 
               <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="contact-form" novalidate>
@@ -984,8 +1014,8 @@
       <div class="footer-top" data-reveal>
         <div class="footer-brand">
           <a href="#home" class="brand-logo" aria-label="Suraj Portfolio Home" data-magnetic>
-            <span class="brand-name">Suraj</span>
-            <span class="brand-dot">.</span>
+            <span class="brand-name">Suraj Gupta</span>
+            
           </a>
           <p class="footer-tagline">
             MCA Student &amp; Aspiring Data Analyst. Transforming complex datasets into clear, actionable business solutions.
@@ -999,7 +1029,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
+            <!-- <li><a href="#experience">Experience</a></li> -->
             <li><a href="#education">Education</a></li>
             <li><a href="#resume">Resume</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -1009,16 +1039,16 @@
         <div class="footer-links-col">
           <span class="footer-heading">Connect</span>
           <ul class="footer-nav">
-            <li><a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://github.com/YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="mailto:YOUR_EMAIL_HERE">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/suraj6386/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://github.com/suraj-6386" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="mailto:sg022529@gmail.com">Email</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
         <p class="copyright-text">
-          &copy; <span id="current-year">2026</span> Suraj. All Rights Reserved. Handcrafted with semantic HTML5, CSS3, &amp; Vanilla JS.
+          &copy; <span id="current-year">2026</span> Suraj Gupta. All Rights Reserved.
         </p>
         <a href="#home" class="footer-back-to-top" id="footer-back-to-top" aria-label="Back to top of page" data-magnetic>
           Back to Top &uarr;
@@ -1026,6 +1056,68 @@
       </div>
     </div>
   </footer>
+
+  <!-- =========================================================
+       RESUME PREVIEW MODAL
+       ========================================================= -->
+  <div class="modal-overlay resume-preview-overlay" id="modal-resume-preview"
+       role="dialog" aria-modal="true" aria-labelledby="resume-modal-title"
+       hidden>
+    <div class="modal-card resume-modal-card">
+
+      <!-- Close (×) button — keyboard accessible -->
+      <button type="button" class="modal-close-btn resume-modal-close"
+              id="resume-modal-close-btn"
+              aria-label="Close resume preview">&#x2715;</button>
+
+      <!-- Modal header -->
+      <div class="resume-modal-header">
+        <div class="resume-modal-title-row">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"
+               aria-hidden="true" class="resume-modal-icon">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+          </svg>
+          <h3 class="resume-modal-title" id="resume-modal-title">Resume Preview</h3>
+        </div>
+        <p class="resume-modal-subtitle">Suraj Gupta &mdash; MCA Student &amp; Aspiring Data Analyst</p>
+      </div>
+
+      <!-- PDF iframe viewer -->
+      <div class="resume-iframe-wrapper">
+        <iframe
+          id="resume-preview-iframe"
+          class="resume-iframe"
+          title="Suraj Gupta Resume PDF Preview"
+          aria-label="Resume PDF document preview"
+          src=""
+          frameborder="0"
+          allowfullscreen>
+          <p>Your browser does not support inline PDF viewing.
+            <a href="assets/resume/Suraj_Resume.pdf" target="_blank" rel="noopener">Open the PDF</a>.
+          </p>
+        </iframe>
+      </div>
+
+      <!-- Modal footer: Download + Close -->
+      <div class="resume-modal-footer">
+        <a href="assets/resume/Suraj_Resume.pdf" download="Suraj_Resume.pdf"
+           class="btn btn-primary btn-download-resume resume-modal-download-btn"
+           id="resume-modal-download-btn"
+           data-magnetic
+           aria-label="Download resume as PDF">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+          <span>Download Resume</span>
+        </a>
+        <button type="button"
+                class="btn btn-outline resume-modal-close-footer"
+                aria-label="Close resume preview"
+                data-magnetic>Close</button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- =========================================================
        PROJECT DETAILS MODALS (ACCESSIBLE POPUPS)

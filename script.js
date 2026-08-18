@@ -4,7 +4,7 @@
  * Stack: Pure Vanilla JavaScript (ES6+)
  * Modules:
  *   1. Theme Controller (Light Default & Dark Mode Toggle)
- *   2. Page Preloader (0.9s Intro)
+ *   2. Page Preloader (Universal 3s Intro)
  *   3. Dynamic Copyright Year
  *   4. Custom Cursor System (Desktop)
  *   5. Hero Subtitle Rotator
@@ -19,6 +19,7 @@
  *  14. Web3Forms AJAX Contact Form Submission
  *  15. Toast Notifications & Resume Downloads
  *  16. Back to Top Button
+ *  17. Resume Preview Modal (PDF viewer — no auto-download)
  * =========================================================
  */
 
@@ -34,6 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------------------------------
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const rootElement = document.documentElement;
+  let isThemeTransitionRunning = false;
+
+  const createThemeTransitionLayer = () => {
+    const existingLayer = document.getElementById('theme-transition-layer');
+    if (existingLayer) return existingLayer;
+
+    const layer = document.createElement('div');
+    layer.id = 'theme-transition-layer';
+    layer.className = 'theme-transition-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(layer);
+    return layer;
+  };
 
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem('suraj_theme');
@@ -46,7 +60,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const applyTheme = (theme) => {
     rootElement.setAttribute('data-theme', theme);
+    rootElement.style.colorScheme = theme;
     localStorage.setItem('suraj_theme', theme);
+  };
+
+  const applyThemeWithCinematicTransition = (nextTheme) => {
+    const activeTheme = rootElement.getAttribute('data-theme') || 'light';
+    if (activeTheme === nextTheme || isThemeTransitionRunning) return;
+
+    if (prefersReducedMotion || !themeToggleBtn) {
+      applyTheme(nextTheme);
+      return;
+    }
+
+    isThemeTransitionRunning = true;
+
+    const layer = createThemeTransitionLayer();
+    const toggleRect = themeToggleBtn.getBoundingClientRect();
+    const originX = toggleRect.left + (toggleRect.width / 2);
+    const originY = toggleRect.top + (toggleRect.height / 2);
+
+    const farthestX = Math.max(originX, window.innerWidth - originX);
+    const farthestY = Math.max(originY, window.innerHeight - originY);
+    const expansionRadius = Math.hypot(farthestX, farthestY);
+
+    layer.style.setProperty('--theme-origin-x', `${originX}px`);
+    layer.style.setProperty('--theme-origin-y', `${originY}px`);
+    layer.style.setProperty('--theme-wave-radius', `${expansionRadius * 1.08}px`);
+
+    layer.classList.remove('to-dark', 'to-light', 'is-running');
+    layer.classList.add(nextTheme === 'dark' ? 'to-dark' : 'to-light');
+
+    rootElement.classList.add('theme-transitioning');
+
+    // Force style recalc so subsequent class change reliably starts animation.
+    void layer.offsetWidth;
+
+    requestAnimationFrame(() => {
+      layer.classList.add('is-running');
+    });
+
+    const themeSwapDelay = 185;
+    const transitionDuration = 900;
+
+    setTimeout(() => {
+      applyTheme(nextTheme);
+    }, themeSwapDelay);
+
+    setTimeout(() => {
+      layer.classList.remove('is-running', 'to-dark', 'to-light');
+      rootElement.classList.remove('theme-transitioning');
+      isThemeTransitionRunning = false;
+    }, transitionDuration + 120);
   };
 
   // Initialize theme
@@ -57,77 +122,98 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.addEventListener('click', () => {
       const activeTheme = rootElement.getAttribute('data-theme') || 'light';
       const newTheme = activeTheme === 'light' ? 'dark' : 'light';
-      applyTheme(newTheme);
+      applyThemeWithCinematicTransition(newTheme);
     });
   }
 
   // -------------------------------------------------------
-  // 2. PAGE PRELOADER (MINIMUM 3s INTRO TRANSITION)
+  // 2. PAGE PRELOADER (UNIVERSAL ~2s TOTAL TRANSITION)
   // -------------------------------------------------------
-  const preloader = document.getElementById('preloader');
-  const preloaderBar = document.getElementById('preloader-bar');
-  const loaderMinimumDuration = 3000;
+  const preloader = document.getElementById('preloader') || document.querySelector('.preloader');
+  const rootElementForLoader = document.documentElement;
+
+  // Keep total experience near 2s: active phase + exit phase
+  const loaderExitDuration = 550; // matches CSS exit animation
+  const loaderTotalDuration = 2000;
+  const loaderActiveDuration = Math.max(0, loaderTotalDuration - loaderExitDuration);
+  const fallbackLoaderTime = 4000;
+
   const loaderStartTime = performance.now();
   let loaderFinished = false;
+  let fallbackTimer = null;
 
   if (preloader) {
+    rootElementForLoader.classList.add('loading');
     document.body.classList.add('loading');
 
-    if (prefersReducedMotion) {
-      preloader.style.display = 'none';
-      document.body.classList.remove('loading');
-    } else {
-      const finishLoader = () => {
-        if (loaderFinished) return;
-        loaderFinished = true;
+    rootElementForLoader.classList.remove('page-ready');
+    document.body.classList.remove('page-ready');
 
-        preloader.classList.add('fade-out');
-        document.body.classList.remove('loading');
+    const beginLoaderExit = () => {
+      if (!preloader.isConnected) return;
+
+      // Wait one frame so the visible preloader state is painted before exit class is added.
+      requestAnimationFrame(() => {
+        preloader.classList.add('is-exiting');
+
+        rootElementForLoader.classList.add('page-ready');
+        document.body.classList.add('page-ready');
 
         setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 700);
-      };
+          if (preloader.isConnected) {
+            preloader.remove();
+          }
 
-      const startLoaderSequence = () => {
-        if (loaderFinished) return;
+          rootElementForLoader.classList.remove('loading');
+          document.body.classList.remove('loading');
+        }, loaderExitDuration);
+      });
+    };
 
-        if (preloaderBar) {
-          preloaderBar.style.width = '100%';
-        }
+    const finishLoader = () => {
+      if (loaderFinished) return;
 
-        const elapsed = performance.now() - loaderStartTime;
-        const remaining = Math.max(0, loaderMinimumDuration - elapsed);
+      loaderFinished = true;
 
-        setTimeout(finishLoader, remaining);
-      };
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
 
-      setTimeout(() => {
-        if (preloaderBar) preloaderBar.style.width = '26%';
-      }, 180);
+      const elapsed = performance.now() - loaderStartTime;
+      const remainingTime = Math.max(0, loaderActiveDuration - elapsed);
 
-      setTimeout(() => {
-        if (preloaderBar) preloaderBar.style.width = '58%';
-      }, 720);
+      setTimeout(beginLoaderExit, remainingTime);
+    };
 
-      setTimeout(() => {
-        if (preloaderBar) preloaderBar.style.width = '100%';
-      }, 1500);
-
-      window.addEventListener('load', startLoaderSequence, { once: true });
-
-      setTimeout(() => {
-        if (!document.readyState || document.readyState === 'complete') {
-          startLoaderSequence();
-        }
-      }, 1200);
-
-      setTimeout(() => {
-        if (!loaderFinished) {
-          startLoaderSequence();
-        }
-      }, 3500);
+    if (document.readyState === 'complete') {
+      finishLoader();
+    } else {
+      window.addEventListener('load', finishLoader, { once: true });
     }
+
+    fallbackTimer = setTimeout(finishLoader, fallbackLoaderTime);
+
+    // Preserve bfcache handling: skip loader on restored pages.
+    window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
+
+      if (preloader.isConnected) {
+        preloader.remove();
+      }
+
+      rootElementForLoader.classList.remove('loading');
+      document.body.classList.remove('loading');
+
+      rootElementForLoader.classList.add('page-ready');
+      document.body.classList.add('page-ready');
+    });
+  } else {
+    rootElementForLoader.classList.remove('loading');
+    document.body.classList.remove('loading');
+
+    rootElementForLoader.classList.add('page-ready');
+    document.body.classList.add('page-ready');
   }
 
   // -------------------------------------------------------
@@ -430,6 +516,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalOverlays = document.querySelectorAll('.modal-overlay');
   let previouslyFocusedElement = null;
 
+  // Guard against accidental markup regressions: never allow modals to boot visible.
+  modalOverlays.forEach((modal) => {
+    modal.setAttribute('hidden', '');
+  });
+
   const openModal = (modalId) => {
     const modal = document.getElementById(modalId);
     if (!modal) return;
@@ -481,6 +572,77 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // -------------------------------------------------------
+  // 17. RESUME PREVIEW MODAL (PDF viewer — no auto-download)
+  // -------------------------------------------------------
+  const RESUME_PDF_PATH = 'assets/resume/Suraj_Resume.pdf';
+
+  const resumePreviewModal   = document.getElementById('modal-resume-preview');
+  const resumeIframe         = document.getElementById('resume-preview-iframe');
+  const resumeViewBtn        = document.getElementById('resume-view-btn');
+  const resumeModalCloseBtn  = document.getElementById('resume-modal-close-btn');
+
+  let resumeIframeLoaded = false; // lazy-load: set src once, avoid duplicate fetches
+  let resumePreviousFocus = null;
+
+  const openResumeModal = () => {
+    if (!resumePreviewModal) return;
+
+    // Lazy-load the PDF into the iframe on first open
+    if (!resumeIframeLoaded && resumeIframe) {
+      resumeIframe.src = RESUME_PDF_PATH;
+      resumeIframeLoaded = true;
+    }
+
+    resumePreviousFocus = document.activeElement;
+    resumePreviewModal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';   // lock page scroll
+
+    // Shift focus to the close button for keyboard accessibility
+    if (resumeModalCloseBtn) {
+      resumeModalCloseBtn.focus();
+    }
+  };
+
+  const closeResumeModal = () => {
+    if (!resumePreviewModal) return;
+    resumePreviewModal.setAttribute('hidden', '');
+    document.body.style.overflow = '';          // restore scroll
+
+    if (resumePreviousFocus) {
+      resumePreviousFocus.focus();
+    }
+  };
+
+  // "View Resume" trigger (resume section button)
+  if (resumeViewBtn) {
+    resumeViewBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openResumeModal();
+    });
+  }
+
+  // Close button (×)
+  if (resumeModalCloseBtn) {
+    resumeModalCloseBtn.addEventListener('click', closeResumeModal);
+  }
+
+  // Footer "Close" button inside the modal
+  if (resumePreviewModal) {
+    const resumeFooterClose = resumePreviewModal.querySelector('.resume-modal-close-footer');
+    if (resumeFooterClose) {
+      resumeFooterClose.addEventListener('click', closeResumeModal);
+    }
+
+    // Backdrop click — click directly on the overlay div (not the card)
+    resumePreviewModal.addEventListener('click', (e) => {
+      if (e.target === resumePreviewModal) {
+        closeResumeModal();
+      }
+    });
+  }
+
 
   // -------------------------------------------------------
   // 14. TOAST NOTIFICATION SYSTEM
